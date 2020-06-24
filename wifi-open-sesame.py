@@ -3,12 +3,10 @@ import requests
 import json
 import time
 import os
-from threading import Thread, Timer
 import subprocess
 
 SESAME_ID = "xxxxxxxxxxxxxxxxxxxxxxxxxx"
 API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxx"
-KENCHI_FLAG = False
 CELL_DEVICE_IP = "192.168.11.34"
 
 
@@ -40,16 +38,12 @@ def open_sesame():
 if __name__ == "__main__":
 
     detection_count = 0
-    un_detection_count = 1000
     while True:
         print("Deviceを検出中です")
         if detection() == True:
             detection_count = detection_count + 1
-            un_detection_count = 0
         else:
             detection_count = 0
-            un_detection_count = un_detection_count + 1
         print("検出回数：", detection_count)
-        print("非検出回数：", un_detection_count)
         if detection_count == 1:
             open_sesame()
